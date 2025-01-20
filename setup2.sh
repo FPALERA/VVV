@@ -87,7 +87,7 @@ function first_setup(){
 
 ### Update and remove packages
 function base_package() {
-    apt-get autoremove -y man-db apache2 ufw exim4 firewalld snapd* -y
+    apt-get autoremove -y man-db apache2 exim4 snapd* -y
     clear
     print_install "Install the required packages"
 #    sysctl -w net.ipv6.conf.all.disable_ipv6=1 >/dev/null 2>&1
