@@ -28,7 +28,7 @@ TIME=$(date +'%Y-%m-%d %H:%M:%S')
 RAMMS=$(free -m | awk 'NR==2 {print $2}')
 KEY="2145515560:AAE9WqfxZzQC-FYF1VUprICGNomVfv6OdTU"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
-REPO="https://raw.githubusercontent.com/NevermoreSSH/VVV/main/"
+REPO="https://raw.githubusercontent.com/FPALERA/VVV/main/"
 APT="apt-get -y install "
 domain=$(cat /root/domain)
 start=$(date +%s)
@@ -84,7 +84,7 @@ function first_setup(){
 
 ### Update and remove packages
 function base_package() {
-    sudo apt-get autoremove -y man-db apache2 ufw exim4 firewalld snapd* -y
+    sudo apt-get autoremove -y man-db apache2 exim4 snapd* -y
     clear
     print_install "Install the required packages"
     sysctl -w net.ipv6.conf.all.disable_ipv6=1 >/dev/null 2>&1
@@ -140,7 +140,7 @@ function pasang_ssl() {
     mkdir /root/.acme.sh
     systemctl stop $STOPWEBSERVER
     systemctl stop nginx
-    curl https://raw.githubusercontent.com/NevermoreSSH/VVV/main/acme.sh -o /root/.acme.sh/acme.sh
+    curl https://raw.githubusercontent.com/FPALERA/VVV/main/acme.sh -o /root/.acme.sh/acme.sh
     chmod +x /root/.acme.sh/acme.sh
     /root/.acme.sh/acme.sh --upgrade --auto-upgrade
     /root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
@@ -252,11 +252,11 @@ function download_config(){
     wget -q -O /etc/banner "${REPO}config/banner" >/dev/null 2>&1
     
     # > Add menu, thanks to NevermoreSSH <3
-    wget -O /tmp/menu-master.zip "${REPO}config/menu.zip" >/dev/null 2>&1
-    mkdir /tmp/menu
-    7z e  /tmp/menu-master.zip -o/tmp/menu/ >/dev/null 2>&1
-    chmod +x /tmp/menu/*
-    mv /tmp/menu/* /usr/sbin/
+    wget -O /tmp/menu1-master.zip "${REPO}config/menu.zip" >/dev/null 2>&1
+    mkdir /tmp/menu1
+    7z e  /tmp/menu1-master.zip -o/tmp/menu1/ >/dev/null 2>&1
+    chmod +x /tmp/menu1/*
+    mv /tmp/menu1/* /usr/sbin/
 
 
     cat >/root/.profile <<EOF
@@ -267,7 +267,7 @@ if [ "$BASH" ]; then
     fi
 fi
 mesg n || true
-menu
+menu1
 EOF
 
 cat >/etc/cron.d/xp_all <<EOF
@@ -375,7 +375,7 @@ print_ok "Selesai pemasangan modul tambahan"
 
 
 ########## SETUP FROM HERE ##########
-# ORIGINAL SCRIPT BY NEVERMORESSH   #
+# SSH/XRAY SCRIPT BY FPALERA   #
 #####################################
 echo "INSTALLING SCRIPT..."
 
@@ -383,7 +383,7 @@ touch /root/.install.log
 cat >/root/tmp <<-END
 #!/bin/bash
 #vps
-### NevermoreSSHTunnel $TANGGAL $MYIP
+### FPALERASSHTunnel $TANGGAL $MYIP
 END
 ####
 NEVERMORESSH() {
